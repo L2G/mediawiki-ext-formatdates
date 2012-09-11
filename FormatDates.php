@@ -26,16 +26,16 @@ $wgExtensionCredits['parserhook'][] = array(
 	'description' => 'Supports refactoring of unlinked dates through the <code><nowiki><date></nowiki></code> tag',
 );
 
-function efFormatDatesSetHook( $parser ) {
+function efFormatDatesSetHook( Parser $parser ) {
 	$parser->setHook( 'date', 'efFormatDate' );
 	return true;
 }
 
-function efFormatDate( $text, $args, &$parser ) {
+function efFormatDate( $text, array $args, Parser $parser, PPFrame $frame ) {
 	global $wgUseDynamicDates, $wgContLang;
 	if( $wgUseDynamicDates ) {
 		$dp = new DateParser( $wgContLang, DateParser::convertPref( $parser->getOptions()->getDateFormat() ) );
-		return $dp->reformat( $text );
+		return $dp->reformat( $parser->recursiveTagParse( $text, $frame ) );
 	} else {
 		return $text;
 	}
