@@ -22,8 +22,10 @@ $wgHooks['ParserFirstCallInit'][] = 'efFormatDatesSetHook';
 $wgExtensionCredits['parserhook'][] = array(
 	'path' => __FILE__,
 	'name' => 'Date Formatter',
-	'author' => 'Rob Church',
-	'description' => 'Supports refactoring of unlinked dates through the <code><nowiki><date></nowiki></code> tag',
+	'version' => '1.0.1-alpha.1',
+	'author' => array('Rob Church', 'Larry Gilbert'),
+	'description' => 'Reformats \'\'unlinked\'\' dates marked up with the <code><nowiki><date></nowiki></code> tag',
+	'url' => 'https://www.mediawiki.org/wiki/Extension:Date_Formatter',
 );
 
 function efFormatDatesSetHook( Parser $parser ) {
